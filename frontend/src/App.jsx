@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -17,13 +17,25 @@ function App() {
   })
     .then((response) => response.json())
     .then((updatedTask) => {
-      setTasks(
-        tasks.map((task) =>
-          task.id === id ? updatedTask : task
-        ) 
-      );
+      setTasks((prevTasks) =>
+  prevTasks.map((task) =>
+    task.id === id ? updatedTask : task
+  )
+);
     });
   }
+
+  function deleteCompletedTasks() {
+  const completedTasks = tasks.filter(task => task.completed);
+
+  completedTasks.forEach(task => {
+    fetch(`http://127.0.0.1:5000/tasks/${task.id}`, {
+      method: "DELETE",
+    });
+  });
+
+  setTasks(tasks.filter(task => !task.completed));
+}
 
   function addTask() {
   fetch("http://127.0.0.1:5000/tasks", {
@@ -33,15 +45,30 @@ function App() {
     },
     body: JSON.stringify({
       title: newTask,
-      completed: false,
     }),
   })
-    .then((response) => response.json())
-    .then((task) => {
-      setTasks([...tasks, task]);
-      setNewTask("");
-    });
+  .then(() => {
+    fetch("http://127.0.0.1:5000/tasks")
+      .then(response => response.json())
+      .then(data => {
+        setTasks(data);
+      });
+  });
+  
+
+  setNewTask("");
 }
+
+  function deleteTask(id) {
+    fetch(`http://127.0.0.1:5000/tasks/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setTasks((prevTasks) =>
+          prevTasks.filter((task) => task.id !== id)
+        );
+      });
+  }
 
   return (
     <div className="App">
@@ -68,10 +95,16 @@ function App() {
 
     <div className="tasks">
       <h2>Add New Task</h2>
-      <label>Task Name: </label>
-      <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)}></input>
       <button onClick={addTask}>Add Task</button>
+      <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)}></input>
       </div>
+    
+    <br></br>
+
+    <div className="tasks">
+      <h2>Delete Completed Tasks</h2>
+      <button onClick={deleteCompletedTasks}>Delete Completed Tasks</button>
+    </div>
     </div>
   );
 }
