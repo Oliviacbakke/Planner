@@ -1,38 +1,95 @@
 .App {
-  background-color: #A6C6B0;
   min-height: 100vh;
   margin: 0;
   width: 100%;
+  background-color: #36454F;
 }
 
 .card {
-  background: #B76B7D;
+  background: #36454F;
   color: #F2EEE9;
-  font: "Times New Roman";
+  font-family: "Times New Roman", serif;
   padding: 20px;
-  border-radius: 10px;
+  border-color: #B76B7D;
+  border-style: solid;
+  border-width: 1px;
 }
 
 h1 {
   color: #F2EEE9;
+  font-family: "Times New Roman", serif;
 }
 
 h2 {
   color: #F2EEE9;
+  font-family: "Times New Roman", serif;
 }
 
-.tasks {
-  background: #B76B7D;
+.planner-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.left_column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.right_column {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.task_header {
+  background: #36454F;
   color: #F2EEE9;
-  font: "Times New Roman";
+  font-family: "Times New Roman", serif;
+  font-size: 40px;
   padding: 20px;
-  border-radius: 50px;
-  width: 30%;
+  border-color: #B76B7D;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.tasks { 
+  background: #36454F;
+  color: #F2EEE9;
+  font-family: "Times New Roman", serif;
+  padding: 20px;
+  border-color: #B76B7D;
+  border-style: solid;
+  border-width: 1px;
   text-align: left;
 }
 
-.breaks {
-  height: 20px;
-  background-color: #A6C6B0;
+.button {
+  background-color: #F2EEE9;
+  font-family: "Times New Roman", serif;
+  border-color: #4F6E5A;
+  color: #36454F;
 }
 
+.schedule_header {
+  background: #36454F;
+  color: #F2EEE9;
+  font-family: "Times New Roman", serif;
+  font-size: 40px;
+  padding: 20px;
+  border-color: #B76B7D;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.schedules {
+  background: #36454F;
+  color: #F2EEE9;
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  padding: 20px;
+  border-color: #B76B7D;
+  border-style: solid;
+  border-width: 1px;
+}
